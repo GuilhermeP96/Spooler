@@ -4,12 +4,12 @@ O projeto Spooler é uma ferramenta de linha de comando para a execução eficie
 
 ## Pré-requisitos
 
-- Python: Para formatação do TNSNAMES.ora;
+- Python: Para formatação do TNSNAMES.ora.
 - Java 8: Para execução da aplicação.
 
 ### Para desenvolvedores
 
-- ojdbc8
+- ojdbc8.
 
 ## Configuração
 
