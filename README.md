@@ -1,58 +1,56 @@
 # Spooler Project
 
-O projeto Spooler È uma ferramenta de linha de comando para a execuÁ„o eficiente de spools de dados do Oracle Database, otimizando consultas e a geraÁ„o de relatÛrios CSV.
+O projeto Spooler √© uma ferramenta de linha de comando para a execu√ß√£o eficiente de spools de dados do Oracle Database, otimizando consultas e a gera√ß√£o de relat√≥rios CSV.
 
-## PrÈ-requisitos
+## Pr√©-requisitos
 
-- Python: Para formataÁ„o do TNSNAMES.ora;
-- Java 8: Para execuÁ„o da aplicaÁ„o.
+- Python: Para formata√ß√£o do TNSNAMES.ora;
+- Java 8: Para execu√ß√£o da aplica√ß√£o.
 
 ### Para desenvolvedores
 
 - ojdbc8
 
-## ConfiguraÁ„o
+## Configura√ß√£o
 
-### Vari·veis de Ambiente
+### Vari√°veis de Ambiente
 
-Antes de executar a aplicaÁ„o Spooler, configure as seguintes vari·veis de ambiente na conta do usu·rio que ir· executar a aplicaÁ„o:
+Antes de executar a aplica√ß√£o Spooler, configure as seguintes vari√°veis de ambiente na conta do usu√°rio que ir√° executar a aplica√ß√£o:
 
-- `USUARIO_XE`: Define o usu·rio do Oracle Database. Por exemplo, `root`.
-- `XE`: Define a senha do usu·rio do Oracle Database. Por exemplo, `toor`.
+- `USUARIO_XE`: Define o usu√°rio do Oracle Database. Por exemplo, `root`.
+- `XE`: Define a senha do usu√°rio do Oracle Database. Por exemplo, `toor`.
 
-- Outras vari·veis podem ser criadas com aliases e valores de acordo com a quantidade de usu·rios e senhas necess·rias para diversos arquivos de configuraÁıes para inst‚ncias diferentes de bases de dados.
+- Outras vari√°veis podem ser criadas com aliases e valores de acordo com a quantidade de usu√°rios e senhas necess√°rias para diversos arquivos de configura√ß√µes para inst√¢ncias diferentes de bases de dados.
 
-Isso garante que apenas a conta autenticada tenha acesso ‡s credenciais do banco de dados.
+Isso garante que apenas a conta autenticada tenha acesso √†s credenciais do banco de dados.
 
 ### TNSNAMES.ora
 
-A aplicaÁ„o depende da correta localizaÁ„o e formataÁ„o do arquivo `TNSNAMES.ora`. Configure a vari·vel de ambiente `TNS_ADMIN` para apontar para o diretÛrio que contÈm o arquivo `TNSNAMES.ora`.
+A aplica√ß√£o depende da correta localiza√ß√£o e formata√ß√£o do arquivo `TNSNAMES.ora`. Configure a vari√°vel de ambiente `TNS_ADMIN` para apontar para o diret√≥rio que cont√©m o arquivo `TNSNAMES.ora`.
 
 ### Limpeza do TNSNAMES.ora
 
-Use o script `LimpaTNS.py` no diretÛrio `runsample` para formatar o `TNSNAMES.ora` antes de usar o Spooler. Execute o script com o seguinte comando:
+Use o script `LimpaTNS.py` no diret√≥rio `runsample` para formatar o `TNSNAMES.ora` antes de usar o Spooler. Execute o script com o seguinte comando:
 
 ```bash
 python LimpaTNS.py.
 ```
 
-### DefiniÁ„o do NLS_LANG
-A vari·vel NLS_LANG È configurada pelo arquivo batch spooler.cmd para definir o conjunto de caracteres para a sess„o do Oracle. O arquivo spooler.cmd deve ser executado para iniciar a aplicaÁ„o.
-
-
-
+### Defini√ß√£o do NLS_LANG
+A vari√°vel NLS_LANG √© configurada pelo arquivo batch spooler.cmd para definir o conjunto de caracteres para a sess√£o do Oracle. O arquivo spooler.cmd deve ser executado para iniciar a aplica√ß√£o.
 
 ### Uso
-Para executar a aplicaÁ„o, use o arquivo de exemplo:
+Para executar a aplica√ß√£o, personalize os arquivos `runsample/query.sql` e `runsample/config.txt`, ap√≥s isso use o arquivo de exemplo `runsample/spooler.cmd` ou os comandos abaixo no Prompt de Comando do Windows:
 
 ```bash
-runsample/spooler.cmd
+set NLS_LANG=.AL32UTF8
+java -jar runsample\Spooler.jar runsample\config.txt >> runsample\log.txt 2>&1
 ```
 
-### Arquivos de ConfiguraÁ„o e ExecuÁ„o
-Os arquivos de exemplo para configuraÁ„o e query SQL est„o localizados no diretÛrio runsample. O arquivo de configuraÁ„o confige.txt deve ser preenchido com os detalhes de conex„o, par‚metros de formataÁ„o e caminho do arquivo de saÌda conforme o exemplo abaixo:
+### Arquivos de Configura√ß√£o e Execu√ß√£o
+Os arquivos de exemplo para configura√ß√£o e query SQL est√£o localizados no diret√≥rio runsample. O arquivo de configura√ß√£o confige.txt deve ser preenchido com os detalhes de conex√£o, par√¢metros de formata√ß√£o e caminho do arquivo de sa√≠da conforme o exemplo abaixo:
 
-- O campo `DB_INSTANCE` È o nome da String presente no TNSNAMES.ora.
+- O campo `DB_INSTANCE` √© o nome da String presente no TNSNAMES.ora.
 
 ```bash
 DB_USER_ENV=USUARIO_XE
@@ -67,17 +65,17 @@ COLUMN_SEPARATOR=;
 CHARSET=UTF-8
 ```
 
-A query de exemplo query_example.sql deve ser escrita sem ponto e vÌrgula no final para evitar erros de sintaxe.
+A query de exemplo query_example.sql deve ser escrita sem ponto e v√≠rgula no final para evitar erros de sintaxe.
 
-## DocumentaÁ„o Adicional
-Toda a documentaÁ„o do cÛdigo-fonte est· disponÌvel nos coment·rios das classes e mÈtodos no projeto. As convenÁıes de codificaÁ„o seguem as pr·ticas recomendadas e atualizadas de desenvolvimento Java.
+## Documenta√ß√£o Adicional
+Toda a documenta√ß√£o do c√≥digo-fonte est√° dispon√≠vel nos coment√°rios das classes e m√©todos no projeto. As conven√ß√µes de codifica√ß√£o seguem as pr√°ticas recomendadas e atualizadas de desenvolvimento Java.
 
 ## Desempenho
-Consultas diretas a tabelas sem necessidade de processamento prolongado da base de dados demonstraram uma reduÁ„o significativa no tempo de execuÁ„o, de aproximadamente 2 horas e meia para 4 minutos.
+Consultas diretas a tabelas sem necessidade de processamento prolongado da base de dados demonstraram uma redu√ß√£o significativa no tempo de execu√ß√£o, de aproximadamente 2 horas e meia para 4 minutos.
 
-## ContribuiÁ„o
+## Contribui√ß√£o
 Para contribuir com o projeto, por favor, envie um e-mail para guilherme.pinheiro@gp96.com.br.
 
-## LicenÁa
+## Licen√ßa
 
-Este projeto È licenciado sob a MIT License - veja o arquivo LICENSE.md para mais detalhes.
+Este projeto √© licenciado sob a MIT License - veja o arquivo LICENSE.md para mais detalhes.
