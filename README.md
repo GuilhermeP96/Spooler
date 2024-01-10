@@ -33,7 +33,7 @@ A aplicação depende da correta localização e formatação do arquivo `TNSNAM
 Use o script `LimpaTNS.py` no diretório `runsample` para formatar o `TNSNAMES.ora` antes de usar o Spooler. Execute o script com o seguinte comando:
 
 ```bash
-python LimpaTNS.py.
+python LimpaTNS.py
 ```
 
 ### Definição do NLS_LANG
