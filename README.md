@@ -37,7 +37,7 @@ python LimpaTNS.py
 ```
 
 ### Definição do NLS_LANG
-A variável NLS_LANG é configurada pelo arquivo batch spooler.cmd para definir o conjunto de caracteres para a sessão do Oracle. O arquivo spooler.cmd deve ser executado para iniciar a aplicação.
+A variável `NLS_LANG` é configurada temporariamente pelo arquivo batch `spooler.cmd` para definir o conjunto de caracteres para a sessão do Oracle. O arquivo `spooler.cmd` deve ser executado para iniciar a aplicação.
 
 ### Uso
 Para executar a aplicação, personalize os arquivos `runsample/query.sql` e `runsample/config.txt`, após isso use o arquivo de exemplo `runsample/spooler.cmd` ou os comandos abaixo no Prompt de Comando do Windows:
@@ -48,7 +48,7 @@ java -jar runsample\Spooler.jar runsample\config.txt >> runsample\log.txt 2>&1
 ```
 
 ### Arquivos de Configuração e Execução
-Os arquivos de exemplo para configuração e query SQL estão localizados no diretório runsample. O arquivo de configuração confige.txt deve ser preenchido com os detalhes de conexão, parâmetros de formatação e caminho do arquivo de saída conforme o exemplo abaixo:
+Os arquivos de exemplo para configuração e query SQL estão localizados no diretório `runsample`. O arquivo de configuração `config.txt` deve ser preenchido com os detalhes de conexão, parâmetros de formatação e caminho do arquivo de saída conforme o exemplo abaixo:
 
 - O campo `DB_INSTANCE` é o nome da String presente no TNSNAMES.ora.
 
@@ -69,6 +69,8 @@ A query de exemplo `query.sql` deve ser escrita sem ponto e vírgula no final pa
 
 ## Documentação Adicional
 Toda a documentação do código-fonte está disponível nos comentários das classes e métodos no projeto. As convenções de codificação seguem as práticas recomendadas e atualizadas de desenvolvimento Java.
+
+O `spooler.cmd` está configurado para gerar um arquivo de despejo `log.txt` com os detalhes da execução.
 
 ## Desempenho
 Consultas diretas a tabelas sem necessidade de processamento prolongado da base de dados demonstraram uma redução significativa no tempo de execução, de aproximadamente 2 horas e meia para 4 minutos.
