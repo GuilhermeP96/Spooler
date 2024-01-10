@@ -65,7 +65,7 @@ COLUMN_SEPARATOR=;
 CHARSET=UTF-8
 ```
 
-A query de exemplo query_example.sql deve ser escrita sem ponto e vírgula no final para evitar erros de sintaxe.
+A query de exemplo `query.sql` deve ser escrita sem ponto e vírgula no final para evitar erros de sintaxe.
 
 ## Documentação Adicional
 Toda a documentação do código-fonte está disponível nos comentários das classes e métodos no projeto. As convenções de codificação seguem as práticas recomendadas e atualizadas de desenvolvimento Java.
