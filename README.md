@@ -51,19 +51,7 @@ java -jar runsample\Spooler.jar runsample\config.txt >> runsample\log.txt 2>&1
 Os arquivos de exemplo para configuração e query SQL estão localizados no diretório `runsample`. O arquivo de configuração `config.txt` deve ser preenchido com os detalhes de conexão, parâmetros de formatação e caminho do arquivo de saída conforme o exemplo abaixo:
 
 - O campo `DB_INSTANCE` é o nome da String presente no TNSNAMES.ora.
-
-```bash
-DB_USER_ENV=USUARIO_XE
-DB_PASSWORD_ENV=XE
-DB_INSTANCE=XE
-SQL_FILE_PATH=C:\\project\\runsample\\spool.sql
-ARQUIVO_SAIDA=C:\\project\\output\\spool.csv
-DECIMAL_SEPARATOR=.
-DATE_FORMAT=DD/MM/YYYY
-ENCLOSURE_CHARACTER="
-COLUMN_SEPARATOR=;
-CHARSET=UTF-8
-```
+- Os formatos de casas decimais e datas são no padrão Java, e não Oracle.
 
 A query de exemplo `query.sql` deve ser escrita sem ponto e vírgula no final para evitar erros de sintaxe.
 
