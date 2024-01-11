@@ -70,6 +70,6 @@ Para contribuir com o projeto, por favor, envie um e-mail para guilherme.pinheir
 
 Este projeto é licenciado sob a MIT License - veja o arquivo LICENSE.md para mais detalhes.
 
-## Releases
+## Downloads
 
 [Spooler Releases](https://github.com/GuilhermeP96/Spooler/releases)
