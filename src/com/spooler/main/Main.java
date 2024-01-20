@@ -49,6 +49,7 @@ public class Main {
             String sqlFilePath = configManager.getProperty("SQL_FILE_PATH");
             String arquivoSaida = configManager.getProperty("ARQUIVO_SAIDA");
             String decimalFormat = configManager.getProperty("DECIMAL_FORMAT");
+            String decimalSeparator = configManager.getProperty("DECIMAL_SEPARATOR");
             String dateFormat = configManager.getProperty("DATE_FORMAT");
             String enclosureCharacter = configManager.getProperty("ENCLOSURE_CHARACTER");
             String columnSeparator = configManager.getProperty("COLUMN_SEPARATOR");
@@ -58,6 +59,7 @@ public class Main {
             System.out.println("SQL File Path: " + sqlFilePath);
             System.out.println("Arquivo Saida: " + arquivoSaida);
             System.out.println("Decimal Format: " + decimalFormat);
+            System.out.println("Decimal Separator: " + decimalSeparator);
             System.out.println("Date Format: " + dateFormat);
             System.out.println("Enclosure Character: " + enclosureCharacter);
             System.out.println("Column Separator: " + columnSeparator);
@@ -67,10 +69,11 @@ public class Main {
             ConnectionManager connectionManager = new ConnectionManager(dbUrl, dbUser, dbPassword);
             try (Connection conn = connectionManager.openConnection()) {
                 SpoolRunner spoolRunner = new SpoolRunner();
-                spoolRunner.runSpool(sqlFilePath, conn, arquivoSaida, decimalFormat, dateFormat, enclosureCharacter, columnSeparator, charset);
+                spoolRunner.runSpool(sqlFilePath, conn, arquivoSaida, decimalFormat, decimalSeparator, dateFormat, enclosureCharacter, columnSeparator, charset);
             }
         } catch (Exception e) {
             e.printStackTrace();
+            System.exit(1);
         }
     }
 }

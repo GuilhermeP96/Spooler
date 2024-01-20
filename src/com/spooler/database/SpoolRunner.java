@@ -20,9 +20,10 @@ import com.spooler.util.DateUtils;
 
 public class SpoolRunner {
 
-    public void runSpool(String sqlFilePath, Connection conn, String arquivoSaida, String decimalFormat, String dateFormat, String enclosureCharacter, String columnSeparator, String charset) throws Exception {
+    public void runSpool(String sqlFilePath, Connection conn, String arquivoSaida, String decimalFormat, String decimalSeparator, String dateFormat, String enclosureCharacter, String columnSeparator, String charset) throws Exception {
         // Valores padrão do Oracle
         String defaultDecimalFormat = "#0.##";
+        String defaultDecimalSeparator = ".";
         String defaultDateFormat = "yyyy-MM-dd";
         String defaultEnclosureCharacter = "";
         String defaultColumnSeparator = ",";
@@ -30,6 +31,7 @@ public class SpoolRunner {
                
         // Verificar parâmetros nulos e usar valores padrão, se necessário
         decimalFormat = (decimalFormat != null) ? decimalFormat : defaultDecimalFormat;
+        decimalSeparator = (decimalSeparator != null) ? decimalSeparator : defaultDecimalSeparator;
         dateFormat = (dateFormat != null) ? dateFormat : defaultDateFormat;
         enclosureCharacter = (enclosureCharacter != null) ? enclosureCharacter : defaultEnclosureCharacter;
         columnSeparator = (columnSeparator != null) ? columnSeparator : defaultColumnSeparator;
@@ -37,6 +39,7 @@ public class SpoolRunner {
 
         // Imprimir avisos para parâmetros nulos
         if(decimalFormat.equals(null)) System.out.println("Aviso: Separador decimal nulo. Usando padrão: '" + defaultDecimalFormat + "'");
+        if(decimalSeparator.equals(null)) System.out.println("Aviso: Separador decimal nulo. Usando padrão: '" + defaultDecimalSeparator + "'");
         if(dateFormat.equals(null)) System.out.println("Aviso: Formato de data nulo. Usando padrão: '" + defaultDateFormat + "'");
         if(enclosureCharacter.equals(null)) System.out.println("Aviso: Caractere enclausurador nulo. Usando padrão: '" + defaultEnclosureCharacter + "'");
         if(columnSeparator.equals(null)) System.out.println("Aviso: Separador de colunas nulo. Usando padrão: '" + defaultColumnSeparator + "'");
@@ -85,7 +88,7 @@ public class SpoolRunner {
                     for (int i = 1; i <= columnCount; i++) {
                         Object value = rs.getObject(i);
                         int columnType = rsmd.getColumnType(i);
-                        String formattedValue = formatValue(value, columnType, dateFormat, decimalFormat);
+                        String formattedValue = formatValue(value, columnType, dateFormat, decimalFormat, decimalSeparator);
                         row.append(enclosureCharacter).append(formattedValue).append(enclosureCharacter);
                         if (i < columnCount) {
                             row.append(columnSeparator);
@@ -98,8 +101,10 @@ public class SpoolRunner {
             } catch (SQLException e) {
                 System.err.println("Erro Oracle: Código - " + e.getErrorCode() + ", Mensagem - " + e.getMessage());
                 printQueryContext(e.getMessage(), sqlQuery);
+                System.exit(1);
             } catch (Exception e) {
                 e.printStackTrace(); // Para outros tipos de exceções
+                System.exit(1);
             }
         	System.out.println(); 
         }
@@ -128,7 +133,7 @@ public class SpoolRunner {
         }
     }
 
-    private String formatValue(Object value, int columnType, String dateFormat, String decimalFormatPattern) {
+    private String formatValue(Object value, int columnType, String dateFormat, String decimalFormatPattern, String decimalSeparator) {
         if (value == null) {
             return "";
         } else if (columnType == Types.DATE || columnType == Types.TIMESTAMP) {
@@ -137,18 +142,9 @@ public class SpoolRunner {
         } else if (columnType == Types.DECIMAL || columnType == Types.NUMERIC || columnType == Types.FLOAT || columnType == Types.DOUBLE) {
             DecimalFormat df = new DecimalFormat(decimalFormatPattern);
 
-            // Extrair o separador de casas decimais da string decimalFormatPattern, "." definido como caractere padrão
-            char decimalSeparator = '.';
-            for (int i = decimalFormatPattern.length() - 1; i >= 0; i--) {
-                char c = decimalFormatPattern.charAt(i);
-                if (c != '#' && c != '0') {
-                    decimalSeparator = c;
-                    break;
-                }
-            }
-
+            char separatorChar = decimalSeparator.charAt(0);
             DecimalFormatSymbols symbols = new DecimalFormatSymbols();
-            symbols.setDecimalSeparator(decimalSeparator);
+            symbols.setDecimalSeparator(separatorChar);
             df.setDecimalFormatSymbols(symbols);
 
             return df.format(value);
